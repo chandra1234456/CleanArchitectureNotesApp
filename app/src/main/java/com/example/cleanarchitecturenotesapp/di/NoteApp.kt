@@ -6,4 +6,8 @@ import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
 class NoteApp: Application() {
+    override fun onCreate() {
+        super.onCreate()
+        // Your setup logic here
+    }
 }

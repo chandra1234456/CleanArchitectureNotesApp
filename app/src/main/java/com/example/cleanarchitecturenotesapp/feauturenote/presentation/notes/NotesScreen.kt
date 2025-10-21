@@ -1,6 +1,5 @@
 package com.example.cleanarchitecturenotesapp.feauturenote.presentation.notes
 
-import android.widget.Space
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -20,21 +19,28 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Sort
-import androidx.compose.material3.*
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.SnackbarResult
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.ui.Modifier
-import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
-import kotlinx.coroutines.launch
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.layout.ModifierLocalBeyondBoundsLayout
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.example.cleanarchitecturenotesapp.feauturenote.presentation.notes.components.NoteItem
 import com.example.cleanarchitecturenotesapp.feauturenote.presentation.notes.components.OrderSelection
+import com.example.cleanarchitecturenotesapp.feauturenote.presentation.util.Screen
+import kotlinx.coroutines.launch
+import androidx.hilt.navigation.compose.hiltViewModel
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NotesScreen(
     navController: NavController,
@@ -49,6 +55,7 @@ fun NotesScreen(
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {
+                    navController.navigate(Screen.AddEditNoteScreen.route)
                     scope.launch {
                         snackbarHostState.showSnackbar("FAB clicked!")
                     }
@@ -110,6 +117,9 @@ fun NotesScreen(
                             .fillMaxWidth()
                             .clickable {
                                 // Handle note click
+                                navController.navigate(
+                                    Screen.AddEditNoteScreen.route +"?noteId=${note.id}&noteColor=${note.color}"
+                                )
                             },
                         onDeleteClick = {
                             viewModel.onEvent(NotesEvent.DeleteNote(note))

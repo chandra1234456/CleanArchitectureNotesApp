@@ -7,6 +7,7 @@ import com.example.cleanarchitecturenotesapp.feauturenote.data.repository.NoteRe
 import com.example.cleanarchitecturenotesapp.feauturenote.domain.repository.NoteRepository
 import com.example.cleanarchitecturenotesapp.feauturenote.domain.usecase.AddNoteUseCase
 import com.example.cleanarchitecturenotesapp.feauturenote.domain.usecase.DeleteNoteUseCase
+import com.example.cleanarchitecturenotesapp.feauturenote.domain.usecase.GetNoteByIdUseCase
 import com.example.cleanarchitecturenotesapp.feauturenote.domain.usecase.GetNotesUseCase
 import com.example.cleanarchitecturenotesapp.feauturenote.domain.usecase.NoteUseCase
 import dagger.Module
@@ -39,7 +40,8 @@ object AppModule {
         return NoteUseCase(
             getNoteUseCase = GetNotesUseCase(repository),
             deleteNoteUseCase = DeleteNoteUseCase(repository),
-            addNoteUseCase = AddNoteUseCase(repository)
+            addNoteUseCase = AddNoteUseCase(repository),
+            getNoteByIdUseCase = GetNoteByIdUseCase(repository)
         )
 
     }
