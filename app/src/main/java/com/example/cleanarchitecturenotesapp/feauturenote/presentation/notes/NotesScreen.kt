@@ -33,6 +33,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.cleanarchitecturenotesapp.feauturenote.presentation.notes.components.NoteItem
@@ -40,6 +41,7 @@ import com.example.cleanarchitecturenotesapp.feauturenote.presentation.notes.com
 import com.example.cleanarchitecturenotesapp.feauturenote.presentation.util.Screen
 import kotlinx.coroutines.launch
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.compose.rememberNavController
 
 @Composable
 fun NotesScreen(
@@ -98,8 +100,8 @@ fun NotesScreen(
             ) {
                 OrderSelection(
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(vertical = 16.dp),
+                        /*.fillMaxWidth()*/
+                    /*.padding(vertical = 16.dp)*/,
                     noteOrder = state.noteOrder,
                     onOrderChanged = {
                         viewModel.onEvent(NotesEvent.Order(it))
@@ -118,7 +120,7 @@ fun NotesScreen(
                             .clickable {
                                 // Handle note click
                                 navController.navigate(
-                                    Screen.AddEditNoteScreen.route +"?noteId=${note.id}&noteColor=${note.color}"
+                                    Screen.AddEditNoteScreen.route + "?noteId=${note.id}&noteColor=${note.color}"
                                 )
                             },
                         onDeleteClick = {

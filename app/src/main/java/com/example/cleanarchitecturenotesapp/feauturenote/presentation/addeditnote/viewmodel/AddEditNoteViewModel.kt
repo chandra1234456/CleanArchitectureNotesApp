@@ -30,7 +30,7 @@ class AddEditNoteViewModel @Inject constructor(
     val noteTitle: State<NoteTextFieldState> = _noteTitle
 
     private val _noteContent = mutableStateOf(NoteTextFieldState(
-        "Please Enter Content......."
+        hit = "Please Enter Content......."
     ))
     val noteContent: State<NoteTextFieldState> = _noteContent
 
@@ -56,7 +56,7 @@ class AddEditNoteViewModel @Inject constructor(
                            text = note.content,
                            isHintVisible = false
                        )
-                       _noteColor.value = note.color
+                       _noteColor.intValue = note.color
 
                    }
                }
@@ -67,7 +67,7 @@ class AddEditNoteViewModel @Inject constructor(
     fun onEvent(event: AddEditNoteEvent){
         when(event){
             is AddEditNoteEvent.ChangeColor -> {
-              _noteColor.value = event.color
+              _noteColor.intValue = event.color
             }
             is AddEditNoteEvent.ChangeContentFocus -> {
                 _noteContent.value = noteContent.value.copy(
@@ -104,7 +104,7 @@ class AddEditNoteViewModel @Inject constructor(
                         _eventFlow.emit(UiEvent.SaveNote)
                     }catch (e: InvalidNoteException){
                       _eventFlow.emit(
-                          UiEvent.showSnackBar(
+                          UiEvent.ShowSnackBar(
                               message = e.message?:"Unknown Error/Could not Save Not"
                           )
                       )
@@ -116,7 +116,7 @@ class AddEditNoteViewModel @Inject constructor(
     }
 
     sealed class UiEvent{
-        data class showSnackBar(val message: String) : UiEvent()
+        data class ShowSnackBar(val message: String) : UiEvent()
         object SaveNote : UiEvent()
 
     }

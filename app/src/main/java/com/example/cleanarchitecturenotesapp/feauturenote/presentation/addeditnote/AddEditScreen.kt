@@ -63,7 +63,7 @@ fun AddEditScreen(
     LaunchedEffect(key1 = true) {
         viewModel.eventFlow.collectLatest { event ->
             when(event){
-                is AddEditNoteViewModel.UiEvent.showSnackBar->{
+                is AddEditNoteViewModel.UiEvent.ShowSnackBar->{
                     snackBarHostState.showSnackbar(message = event.message)
                 }
 

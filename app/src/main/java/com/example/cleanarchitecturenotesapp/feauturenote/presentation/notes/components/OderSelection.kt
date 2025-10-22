@@ -3,11 +3,14 @@ package com.example.cleanarchitecturenotesapp.feauturenote.presentation.notes.co
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.cleanarchitecturenotesapp.feauturenote.domain.util.NoteOrder
 import com.example.cleanarchitecturenotesapp.feauturenote.domain.util.OrderType
@@ -18,8 +21,8 @@ fun OrderSelection(
     noteOrder: NoteOrder = NoteOrder.Date(OrderType.Descending),
     onOrderChanged :(NoteOrder) -> Unit
 ){
-    Column(modifier) {
-        Row(modifier.fillMaxWidth()) {
+    Column(modifier.fillMaxWidth()) {
+        Row(modifier,verticalAlignment = Alignment.CenterVertically) {
            DefaultRadioButton(
                text = "Title",
                selected = noteOrder is NoteOrder.Title,
@@ -39,12 +42,12 @@ fun OrderSelection(
             )
 
         }
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(1.dp))
         Row(modifier.fillMaxWidth()) {
             DefaultRadioButton(
                 text = "Ascending",
                 selected = noteOrder.orderType is OrderType.Ascending,
-                onSelect = {onOrderChanged(noteOrder.copy(OrderType.Descending))}
+                onSelect = {onOrderChanged(noteOrder.copy(OrderType.Ascending))}
             )
             Spacer(modifier.width(8.dp))
             DefaultRadioButton(
@@ -56,3 +59,11 @@ fun OrderSelection(
     }
 
 }
+/*@Preview(showBackground = true)
+@Composable
+fun PreviewFirstComposable() {
+    OrderSelection(
+        noteOrder = NoteOrder.Date(OrderType.Descending),
+        onOrderChanged = {}
+    )
+}*/
